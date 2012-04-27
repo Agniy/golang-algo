@@ -33,13 +33,13 @@ func InsertionSort(input []rune) []rune{
 func MergeSort(input []rune) []rune{
 	
 	/** split input first*/
-	sp1, sp2 := split(input)
+//	sp1, sp2 := split(input)
 	
 	return []rune{1,2,3};
 }
 
 /** split slice into two slices*/
-func split(input []rune) []rune, rune[]{
+func split(input []rune) ([]rune, []rune){
 	/** split point*/
 	sp := len(input)/2
 	return input[:sp], input[sp + 1:]
