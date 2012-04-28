@@ -4,7 +4,7 @@ package algo
 * Attention: we modify the input slice
 **/
 
-func InsertionSort(input []rune) []rune{
+func InsertionSort(input []interface{}, eq Equals) []interface{}{
 	
 	length := len(input);
 	/** input is already sorted*/
@@ -20,7 +20,8 @@ func InsertionSort(input []rune) []rune{
 			* We shift all elemsnt in [0, j-1] to the right, until we find the first 
 			* elemen <= [j]
 			*/
-			if input[j] >= input[j -1]{
+			if eq(input[j], input[j-1]) != -1 {
+				//input[j] >= input[j-1]
 				break; //we found element < [j]
 			}
 			swap(j, j-1, input); //move element[j] left
@@ -30,24 +31,12 @@ func InsertionSort(input []rune) []rune{
 	return input;
 }
 
-func MergeSort(input []rune) []rune{
-	
-	/** split input first*/
-//	sp1, sp2 := split(input)
-	
-	return []rune{1,2,3};
+func MergeSort(input []interface{}, eq Equals) []interface{}{
+	return nil;
 }
-
-/** split slice into two slices*/
-func split(input []rune) ([]rune, []rune){
-	/** split point*/
-	sp := len(input)/2
-	return input[:sp], input[sp + 1:]
-}
-
 
 /** swap elements in input*/
-func swap(index1 int, index2 int,  input []rune){
+func swap(index1 int, index2 int,  input []interface{}){
 	tmp := input[index1]
 	input[index1] = input[index2]
 	input[index2] = tmp
