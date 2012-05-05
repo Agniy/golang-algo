@@ -39,6 +39,22 @@ func TestInsertionSort(t *testing.T){
 	/** validate result*/
 	validate(t, sortedSqnce);
 }
+/** Tets merge*/
+func TestMergeLeftEqualsRight(t *testing.T){
+	input := []interface{}{Rune(1),Rune(3), Rune(5), Rune(2), Rune(4), Rune(6)};
+	validate(t, merge(0, 2, 3, 5, input, equals));
+}
+/** Tets merge*/
+func TestMergeLeftOverRight(t *testing.T){
+	input := []interface{}{Rune(1), Rune(2), Rune(3), Rune(5), Rune(4), Rune(6)};
+	validate(t, merge(0, 3, 4, 5, input, equals));
+}
+
+/** Tets merge*/
+func TestMergeRightOverLeft(t *testing.T){
+	input := []interface{}{Rune(1), Rune(3), Rune(2), Rune(4), Rune(5), Rune(6)};
+	validate(t, merge(0, 1, 2, 5, input, equals));
+}
 
 /** Test "merge sort" algo*/
 func TestMergeSort(t *testing.T){
