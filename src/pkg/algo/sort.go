@@ -1,11 +1,12 @@
 package algo
-
-
 /**
 * File to contain sorting algo implementation
 * Attention: we modify the input slice
 **/
 
+/**
+*
+*/
 func InsertionSort(input []interface{}, eq Equals) []interface{}{
 	
 	length := len(input);
@@ -38,21 +39,19 @@ func MergeSort(input []interface{}, eq Equals) []interface{}{
 	return input;
 }
 
-func mergeSort(start int, end int, input []interface{}, eq Equals) (int, int){
+func mergeSort(start int, end int, input []interface{}, eq Equals){
 
-	//array length
-	length := end - start +1;
-	if length == 1{
-		// here we finish splitting
-		return start, end;
+	if start == end {
+		// we have reached a leaf, stop splitting
+		return;
 	}
-	media := start + length/2
-	
-	lstart, lend := mergeSort(start, media, input, eq)
-	rstart, rend := mergeSort(media + 1, end, input, eq)
-	
-	merge(lstart, lend, rstart, rend, input, eq);
-	return lstart, rend;
+	//split by 2
+	media := (start + end)/2
+	//continue splitting left and right side
+	mergeSort(start, media, input, eq)
+	mergeSort(media + 1, end, input, eq)
+	//start merging
+	merge(start, media, end, input, eq);
 }
 
 
@@ -63,20 +62,20 @@ func mergeSort(start int, end int, input []interface{}, eq Equals) (int, int){
 * and start <= media <= end
 * @returns - merged array
 */
-func merge(lstart int, lend int, rstart int, rend int, input []interface{}, eq Equals) []interface{}{
+func merge(start int, media int, end int, input []interface{}, eq Equals) []interface{}{
 	
-	l := lend - lstart + 1; //left hand length
-	r := rend - rstart +1; //right hand length
+	l := media - start + 1; //left hand length
+	r := end - media; //right hand length
 	
 	var left []interface{} = make([]interface{}, l); //left hand
 	var right []interface{} = make([]interface{}, r); //right hand
 	
 	//copy sorted subsets into left and right hand respectively
-	copy(left, input[lstart:lend + 1]);
-	copy(right, input[rstart:rend + 1]);
+	copy(left, input[start:media + 1]);
+	copy(right, input[media+1:end + 1]);
 	
 	/** start merging*/
-	var i, j, k int = 0, 0, lstart 
+	var i, j, k int = 0, 0, start 
 	for ;(i < l) && (j < r); k++{
 		if eq(left[i], right[j]) == -1 {
 			//input[i] < input[j], we take input [i] 
@@ -88,7 +87,7 @@ func merge(lstart int, lend int, rstart int, rend int, input []interface{}, eq E
 		}
 	}
 	
-	if k < rend {
+	if k <= end {
 		//some data remaind in the left or right hand
 		//case: left and right hands have  different size
 		if i == l {

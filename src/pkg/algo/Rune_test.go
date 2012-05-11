@@ -20,6 +20,12 @@ func getRuneSequence() []interface{} {
 		Rune(0), Rune(5), Rune(8)}
 }
 
+/** generate sorted Rune sequence*/
+func getSortedRuneSequence() []interface{} {
+	return []interface{}{Rune(0), Rune(1), Rune(2), Rune(3), Rune(4), Rune(5),Rune(6), Rune(7), 
+		Rune(8), Rune(8), Rune(9)}
+}
+
 /** generate a pair of Rune elemets, where more > less */
 func getRuneMoreAndLess() (more interface{}, less interface{}){
 	return Rune(3), Rune(2)
